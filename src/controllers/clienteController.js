@@ -22,6 +22,24 @@ async function createCliente(request, response) {
   }
 }
 
+async function loginCliente(request, response) {
+  try {
+    const { email, senha } = request.body;
+
+    const client = await prisma.cliente.findUnique({
+      where: {
+        email,
+        senha,
+      },
+    });
+
+    return response.send(client);
+  } catch (err) {
+    return response.status(500).send({ error: err });
+  }
+}
+
 module.exports = {
   createCliente,
+  loginCliente,
 };
