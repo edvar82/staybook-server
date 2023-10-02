@@ -12,12 +12,19 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use((request, response, next) => {
-    response.header("Access-Control-Allow-Origin", "*");
-    response.header("Access-Control-Allow-Methods", "*");
-    response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
+  response.header("Access-Control-Allow-Origin", "*");
+  response.header("Access-Control-Allow-Methods", "*");
+  response.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
 });
 
+const clienteRouter = require("./src/routes/clienteRouter");
+const cartaoRouter = require("./src/routes/cartaoRouter");
 
+app.use("/cliente", clienteRouter);
+app.use("/cartao", cartaoRouter);
 
 module.exports = app;
