@@ -39,7 +39,24 @@ async function loginCliente(request, response) {
   }
 }
 
+async function getClienteById(resquest, response) {
+  try {
+    const { clienteId } = resquest.params;
+
+    const cliente = await prisma.cliente.findFirst({
+      where: {
+        id: clienteId,
+      },
+    });
+
+    return response.send(cliente);
+  } catch (err) {
+    return response.status(500).send({ error: err });
+  }
+}
+
 module.exports = {
   createCliente,
   loginCliente,
+  getClienteById,
 };
