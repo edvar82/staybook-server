@@ -23,8 +23,12 @@ app.use((request, response, next) => {
 
 const clienteRouter = require("./src/routes/clienteRouter");
 const cartaoRouter = require("./src/routes/cartaoRouter");
+const hotelRouter = require("./src/routes/hotelRouter");
+const reservaRouter = require("./src/routes/reservaRouter");
 
 app.use("/cliente", clienteRouter);
 app.use("/cartao", cartaoRouter);
+app.use("/hotel", hotelRouter);
+app.use("/reserva", reservaRouter);
 
 module.exports = app;

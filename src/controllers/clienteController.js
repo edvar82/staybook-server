@@ -1,6 +1,17 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
+async function getClientes(request, response) {
+  try {
+    const clientes = await prisma.cliente.findMany();
+
+    return response.status(200).send(clientes);
+  } catch (err) {
+    console.log(err);
+    return response.status(500).send({ error: err });
+  }
+}
+
 async function createCliente(request, response) {
   try {
     const { nome, email, senha, cpf, telefone, endereco } = request.body;
@@ -59,4 +70,5 @@ module.exports = {
   createCliente,
   loginCliente,
   getClienteById,
+  getClientes,
 };

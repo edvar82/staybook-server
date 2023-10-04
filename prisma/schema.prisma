@@ -17,9 +17,9 @@ model Cliente {
   endereco  String
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
-  Reserva   Reserva[]
-  Favoritos Favoritos[]
   Cartoes   Cartao[]
+  Favoritos Favoritos[]
+  Reserva   Reserva[]
 }
 
 model Hotel {
@@ -30,8 +30,8 @@ model Hotel {
   site      String
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
-  Reserva   Reserva[]
   Favoritos Favoritos[]
+  Reserva   Reserva[]
 }
 
 model Reserva {
@@ -42,11 +42,11 @@ model Reserva {
   valor      Float
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
-  cliente    Cliente     @relation(fields: [clienteId], references: [id])
   clienteId  String
-  hotel      Hotel       @relation(fields: [hotelId], references: [id])
   hotelId    String
   Avaliacao  Avaliacao[]
+  cliente    Cliente     @relation(fields: [clienteId], references: [id])
+  hotel      Hotel       @relation(fields: [hotelId], references: [id])
   Transacao  Transacao[]
 }
 
@@ -54,10 +54,10 @@ model Favoritos {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  cliente   Cliente  @relation(fields: [clienteId], references: [id])
   clienteId String
-  hotel     Hotel    @relation(fields: [hotelId], references: [id])
   hotelId   String
+  cliente   Cliente  @relation(fields: [clienteId], references: [id])
+  hotel     Hotel    @relation(fields: [hotelId], references: [id])
 }
 
 model Avaliacao {
@@ -66,8 +66,8 @@ model Avaliacao {
   comentario String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-  reserva    Reserva  @relation(fields: [reservaId], references: [id])
   reservaId  String
+  reserva    Reserva  @relation(fields: [reservaId], references: [id])
 }
 
 model Transacao {
@@ -77,8 +77,8 @@ model Transacao {
   metodoPagamento String
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
-  reserva         Reserva  @relation(fields: [reservaId], references: [id])
   reservaId       String
+  reserva         Reserva  @relation(fields: [reservaId], references: [id])
 }
 
 model Cartao {
@@ -89,6 +89,6 @@ model Cartao {
   cvv          String
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
-  cliente      Cliente  @relation(fields: [clienteId], references: [id])
   clienteId    String
+  cliente      Cliente  @relation(fields: [clienteId], references: [id])
 }
