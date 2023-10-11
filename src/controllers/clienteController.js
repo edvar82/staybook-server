@@ -44,7 +44,11 @@ async function loginCliente(request, response) {
       },
     });
 
-    return response.send(client);
+    if (client) {
+      return response.status(201).send(client);
+    }
+
+    return response.send({ error: "error" });
   } catch (err) {
     return response.status(500).send({ error: err });
   }
