@@ -36,8 +36,8 @@ model Hotel {
 
 model Reserva {
   id         String      @id @default(uuid())
-  checkIn    DateTime
-  checkOut   DateTime
+  checkIn    String
+  checkOut   String
   numQuartos Int
   valor      Float
   createdAt  DateTime    @default(now())
@@ -73,7 +73,7 @@ model Avaliacao {
 model Transacao {
   id              String   @id @default(uuid())
   valor           Float
-  data            DateTime
+  data            String
   metodoPagamento String
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
