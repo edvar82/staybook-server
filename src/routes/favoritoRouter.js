@@ -9,5 +9,4 @@ router.get("/:id", favoritoController.getFavoritoById);
 router.get("/", favoritoController.getFavoritos);
 router.get("/cliente/:id", favoritoController.getFavoritosByClienteId);
 
-
 module.exports = router;
