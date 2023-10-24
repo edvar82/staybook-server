@@ -30,8 +30,6 @@ model Hotel {
   site      String
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
-  Favoritos Favoritos[]
-  Reserva   Reserva[]
 }
 
 model Reserva {
@@ -46,7 +44,6 @@ model Reserva {
   hotelId    String
   Avaliacao  Avaliacao[]
   cliente    Cliente     @relation(fields: [clienteId], references: [id])
-  hotel      Hotel       @relation(fields: [hotelId], references: [id])
   Transacao  Transacao[]
 }
 
@@ -57,7 +54,6 @@ model Favoritos {
   clienteId String
   hotelId   String
   cliente   Cliente  @relation(fields: [clienteId], references: [id])
-  hotel     Hotel    @relation(fields: [hotelId], references: [id])
 }
 
 model Avaliacao {

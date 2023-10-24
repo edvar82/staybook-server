@@ -26,11 +26,13 @@ const cartaoRouter = require("./src/routes/cartaoRouter");
 const hotelRouter = require("./src/routes/hotelRouter");
 const reservaRouter = require("./src/routes/reservaRouter");
 const paymentRouter = require("./src/routes/paymentRouter");
+const favoritoRouter = require("./src/routes/favoritoRouter");
 
 app.use("/cliente", clienteRouter);
 app.use("/cartao", cartaoRouter);
 app.use("/hotel", hotelRouter);
 app.use("/reserva", reservaRouter);
 app.use("/payment", paymentRouter);
+app.use("/favoritos", favoritoRouter);
 
 module.exports = app;

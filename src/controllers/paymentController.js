@@ -22,13 +22,13 @@ function getDate() {
   return now;
 }
 
-// const tranporter = nodemailer.createTransport({
-//     service: "gmail",
-//     auth: {
-//         user: "facstaybook@gmail.com",
-//         pass: "St@ybook123",
-//     },
-// });
+const tranporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+        user: "facstaybook@gmail.com",
+        pass: "St@ybook123",
+    },
+});
 
 
 async function createPayment(request, response) {
@@ -73,20 +73,20 @@ async function createPayment(request, response) {
         }
     });
 
-    // const mailOptions = {
-    //     from: "facstaybook@gmail.com",
-    //     to: `${cliente.email}`,
-    //     subject: "Confirmação de reserva",
-    //     text: `Olá ${cliente.nome}, sua reserva no hotel ${nomeHotel} foi confirmada.`
-    // }
+    const mailOptions = {
+        from: "facstaybook@gmail.com",
+        to: `${cliente.email}`,
+        subject: "Confirmação de reserva",
+        text: `Olá ${cliente.nome}, sua reserva no hotel ${nomeHotel} foi confirmada.`
+    }
 
-    // await tranporter.sendMail(mailOptions, function(error, info){
-    //     if(error){
-    //         console.log(error);
-    //     } else {
-    //         console.log("Email enviado: " + info.response);
-    //     }
-    // });
+    await tranporter.sendMail(mailOptions, function(error, info){
+        if(error){
+            console.log(error);
+        } else {
+            console.log("Email enviado: " + info.response);
+        }
+    });
 
     return response.status(201).send(`Criada a reserva com sucesso! ${reserva}, ${transacao}`);
   } catch (err) {
