@@ -18,6 +18,7 @@ async function createHotel(request, response) {
 
     return response.status(201).send(hotel);
   } catch (err) {
+    console.log(err)
     response.status(500).json({ error: err });
   }
 }

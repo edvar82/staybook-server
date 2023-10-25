@@ -23,13 +23,13 @@ model Cliente {
 }
 
 model Hotel {
-  id        String      @id @default(uuid())
+  id        String   @id @default(uuid())
   nome      String
   endereco  String
   telefone  String
   site      String
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Reserva {
@@ -42,6 +42,8 @@ model Reserva {
   updatedAt  DateTime    @updatedAt
   clienteId  String
   hotelId    String
+  hotelName String
+  hotelImg String
   Avaliacao  Avaliacao[]
   cliente    Cliente     @relation(fields: [clienteId], references: [id])
   Transacao  Transacao[]
