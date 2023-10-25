@@ -22,36 +22,46 @@ function getDate() {
   return now;
 }
 
-const tranporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-        user: "facstaybook@gmail.com",
-        pass: "St@ybook123",
-    },
+
+const transporter = nodemailer.createTransport({
+  service: "Gmail", // Por exemplo, "Gmail"
+  auth: {
+    user: "facstaybook@gmail.com", // Seu endereço de e-mail
+    pass: "St@ybook123", // Sua senha de e-mail
+  },
 });
+
+// Função para enviar um e-mail
+async function sendEmail(to, subject, text) {
+  try {
+    // Configurar os detalhes do e-mail
+    const mailOptions = {
+      from: "facstaybook@gmail.com", // Seu endereço de e-mail
+      to: to, // Destinatário
+      subject: subject, // Assunto
+      text: text, // Corpo do e-mail (texto simples)
+    };
+
+    // Enviar o e-mail
+    const info = await transporter.sendMail(mailOptions);
+    console.log("E-mail enviado:", info.response);
+  } catch (error) {
+    console.error("Erro ao enviar o e-mail:", error);
+  }
+}
 
 
 async function createPayment(request, response) {
-    console.log('oi');
-    const { clienteId, hotelId, nomeHotel, checkIn, checkOut, numQuartos, valor, metodoPagamento, idCartao } = request.body;
+  const { clienteId, hotelId, nomeHotel, checkIn, checkOut, numQuartos, valor, metodoPagamento, idCartao } = request.body;
     if(!clienteId || !hotelId || !nomeHotel || !checkIn || !checkOut || !numQuartos || !valor || !metodoPagamento){
       return response.status(400).send({ error: "Dados faltando" });
     }
   try {
-    if(metodoPagamento == "cartao"){
-      const cartao = await prisma.cartao.findUnique({
-        where: {
-          id: idCartao,
-        },
-      });
-    }
-
     const cliente = await prisma.cliente.findUnique({
       where: {
         id: clienteId,
       },
     });
-
 
     const reserva = await prisma.reserva.create({
         data: {
@@ -73,20 +83,7 @@ async function createPayment(request, response) {
         }
     });
 
-    const mailOptions = {
-        from: "facstaybook@gmail.com",
-        to: `${cliente.email}`,
-        subject: "Confirmação de reserva",
-        text: `Olá ${cliente.nome}, sua reserva no hotel ${nomeHotel} foi confirmada.`
-    }
-
-    await tranporter.sendMail(mailOptions, function(error, info){
-        if(error){
-            console.log(error);
-        } else {
-            console.log("Email enviado: " + info.response);
-        }
-    });
+    // sendEmail(`${cliente.email}`, "Confirmação de reserva", `Olá ${cliente.nome}, sua reserva no hotel ${nomeHotel} foi confirmada.`)
 
     return response.status(201).send(`Criada a reserva com sucesso! ${reserva}, ${transacao}`);
   } catch (err) {
