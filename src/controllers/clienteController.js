@@ -50,6 +50,7 @@ async function loginCliente(request, response) {
 
     return response.send({ error: "error" });
   } catch (err) {
+    console.log(err);
     return response.status(500).send({ error: err });
   }
 }
@@ -76,3 +77,4 @@ module.exports = {
   getClienteById,
   getClientes,
 };
+

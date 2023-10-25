@@ -89,10 +89,27 @@ async function deleteReserva(request, response) {
   }
 }
 
+async function getReservasByClienteId(request, response) {
+  try {
+    const { id } = request.params;
+
+    const reservas = await Reserva.findMany({
+      where: {
+        clienteId: id,
+      },
+    });
+
+    return response.status(200).send(reservas);
+  } catch (err) {
+    response.status(500).json({ error: err });
+  }
+}
+
 module.exports = {
   createReserva,
   getReservaById,
   getReservas,
+  getReservasByClienteId,
   updateReserva,
   deleteReserva,
 };

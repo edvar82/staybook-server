@@ -53,9 +53,7 @@ async function sendEmail(to, subject, text) {
 
 async function createPayment(request, response) {
   const { clienteId, hotelId, nomeHotel, checkIn, checkOut, numQuartos, valor, metodoPagamento, idCartao } = request.body;
-    if(!clienteId || !hotelId || !nomeHotel || !checkIn || !checkOut || !numQuartos || !valor || !metodoPagamento){
-      return response.status(400).send({ error: "Dados faltando" });
-    }
+  console.log(clienteId, hotelId, nomeHotel, checkIn, checkOut, numQuartos, valor, metodoPagamento, idCartao);
   try {
     const cliente = await prisma.cliente.findUnique({
       where: {
