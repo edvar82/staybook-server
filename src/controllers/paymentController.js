@@ -52,15 +52,8 @@ async function sendEmail(to, subject, text) {
 
 
 async function createPayment(request, response) {
-  const { clienteId, hotelId, nomeHotel, checkIn, checkOut, numQuartos, valor, metodoPagamento, idCartao } = request.body;
-  console.log(clienteId, hotelId, nomeHotel, checkIn, checkOut, numQuartos, valor, metodoPagamento, idCartao);
+  const { clienteId, hotelId, checkIn, checkOut, numQuartos, valor, metodoPagamento, hotelName, hotelImg} = request.body;
   try {
-    const cliente = await prisma.cliente.findUnique({
-      where: {
-        id: clienteId,
-      },
-    });
-
     const reserva = await prisma.reserva.create({
         data: {
             checkIn,
@@ -68,7 +61,9 @@ async function createPayment(request, response) {
             numQuartos,
             valor,
             hotelId,
-            clienteId
+            clienteId,
+            hotelName,
+            hotelImg
         }
     });
 

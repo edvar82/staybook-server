@@ -42,8 +42,8 @@ model Reserva {
   updatedAt  DateTime    @updatedAt
   clienteId  String
   hotelId    String
-  hotelName String
-  hotelImg String
+  hotelName  String
+  hotelImg   String
   Avaliacao  Avaliacao[]
   cliente    Cliente     @relation(fields: [clienteId], references: [id])
   Transacao  Transacao[]

@@ -29,6 +29,7 @@ async function createCartao(request, response) {
 
     return response.json(cartao);
   } catch (err) {
+    console.log(err);
     return response.status(500).send({ error: err });
   }
 }
@@ -45,6 +46,7 @@ async function getCartaoFromClienteId(request, response) {
 
     return response.status(200).send(cartoes);
   } catch (err) {
+    console.log(err);
     return response.status(500).send({ error: err });
   }
 }

@@ -29,6 +29,7 @@ async function createCliente(request, response) {
 
     return response.status(201).send(cliente);
   } catch (err) {
+    console.log(err);
     response.status(500).send({ error: err });
   }
 }
@@ -67,6 +68,7 @@ async function getClienteById(resquest, response) {
 
     return response.send(cliente);
   } catch (err) {
+    console.log(err);
     return response.status(500).send({ error: err });
   }
 }
